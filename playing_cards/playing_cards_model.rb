@@ -1,8 +1,9 @@
 class Deck
   attr_accessor :cards
-  def initialize(options = {})
+  def initialize(options = {:joker => false})
     @cards = []
     generate_cards
+    generate_jokers if options[:joker]
   end
 
   private
@@ -14,6 +15,11 @@ class Deck
         cards << Card.new({:value => value, :suit => suit})
       end
     end
+  end
+
+  def generate_jokers
+    joker = Card.new({:value => 0, :suit => 'joker'})
+    2.times { cards << joker }
   end
 end
 
@@ -42,8 +48,8 @@ class Card
   end
 end
 
-# deck = Deck.new()
-# p deck.cards
+deck = Deck.new({:joker => true})
+p deck.cards.length
 
 ## Features to add
 # Euchre deck
