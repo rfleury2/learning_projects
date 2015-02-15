@@ -1,9 +1,10 @@
 class Deck
   attr_accessor :cards
-  def initialize(options = {:joker => false})
+  def initialize(options = {:joker => false, :euchre => false})
     @cards = []
     generate_cards
     generate_jokers if options[:joker]
+    trim_to_euchre if options[:euchre]
   end
 
   private
@@ -20,6 +21,10 @@ class Deck
   def generate_jokers
     joker = Card.new({:value => 0, :suit => 'joker'})
     2.times { cards << joker }
+  end
+
+  def trim_to_euchre
+    cards.delete_if { |card| card.value < 9 }
   end
 end
 

@@ -34,4 +34,16 @@ describe Deck do
       expect(joker_deck.cards.count{ |card| card.suit == 'joker' }).to eq 2
     end
   end
+
+  describe ':euchre = true' do
+    let(:euchre_deck) { Deck.new({:euchre => true}) }
+
+    it 'there should be 24 cards' do
+      expect(euchre_deck.cards.length).to eq 24
+    end
+
+    it 'there should be no cards below 9s' do
+      expect(euchre_deck.cards.all?{ |card| card.value > 8 }).to be true
+    end
+  end
 end
