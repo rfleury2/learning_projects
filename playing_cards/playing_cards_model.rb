@@ -52,10 +52,3 @@ class Card
     end
   end
 end
-
-deck = Deck.new({:joker => true})
-p deck.cards.length
-
-## Features to add
-# Euchre deck
-# Joker true/false
